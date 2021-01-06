@@ -1,0 +1,39 @@
+<html>
+<body>
+    <div id="content">
+        <strong>POSTS : </strong>
+    </div>
+</body>
+</html>
+<script>
+var contentDiv = document.getElementById('content');
+function httpGet(url,callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            callback(xmlHttp.responseText);
+        }
+    }
+    xmlHttp.open('GET',url,true);
+    xmlHttp.send();
+}
+
+function handleHttpResponse(response) {
+    var contentElement = document.createElement("div");
+    var resText = JSON.parse(response);
+    var content = JSON.stringify(resText.slice(0,80));
+    contentElement.appendChild(document.createTextNode(content));
+    contentDiv.appendChild(contentElement);
+    arr += response
+}
+
+httpGet('https://jsonplaceholder.typicode.com/posts',handleHttpResponse);
+
+window.onscroll = function() {
+    var pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
+    if(pos === document.documentElement.scrollHeight) {
+        httpGet('https://jsonplaceholder.typicode.com/comments',handleHttpResponse);
+    }
+}
+
+</script>

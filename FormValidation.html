@@ -1,0 +1,118 @@
+<html>
+    <style>
+        .formContainer{
+            text-align: center;
+        }
+        .form{
+            margin: auto;
+            width: 50%;
+            height: 50%;
+            border: 1px solid black;
+            margin-top: 10%;
+            position: relative;
+        }
+        .paddingTop10 {
+            padding-top: 5%;
+        }
+        .errMsg {
+            color: red;
+        }
+        .hide {
+            display : none;
+        }
+        
+    </style>
+    <body>
+        <div class="formContainer">
+            <form class="form" id="myForm" name="userForm" onsubmit="formValidate(event)" novalidate>
+                <div class="paddingTop10">
+                    <label for="fName">FirstName : </label>
+                    <input type="text" name="fName" id="fName" onblur="handleBlur(event)">
+                    <div id="fNameErrMsg" class="errMsg hide">Please enter First Name</div>
+                    <label for="lName">LastName : </label>
+                    <input type="text" name="lName" id="lName" onblur="handleBlur(event)">
+                    <div id="lNameErrMsg" class="errMsg hide">Please enter Last Name</div>
+                </div>
+                <div class="paddingTop10">
+                    <label for="email">Email : </label>
+                    <input type="email" name="email" id="emailId" onblur="handleBlur(event)">
+                    <div id="emailIdErrMsg" class="errMsg hide">Please enter a Valid Email</div>
+                    <label for="pwd">Password : </label>
+                    <input type="password" name="pwd" id="pwd" onblur="handleBlur(event)">
+                    <div id="pwdErrMsg" class="errMsg hide">Please enter Password</div>
+                </div>
+                <div class="paddingTop10">
+                    <label for="age">Age : </label>
+                    <select id="age">
+                    </select>
+                    <label for="state">Country : </label>
+                    <input list="state">
+                    <datalist id="state">
+                    </datalist>
+                </div>
+                
+                <button type="submit" id="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        for(var i=20; i<=30; i++){
+            var optElement = document.createElement("option");
+            optElement.value = i;
+            optElement.appendChild(document.createTextNode(i));
+            document.getElementById('age').appendChild(optElement);
+        }
+        var countries=['CA','NY','TX','FL','GA'];
+        for(var i=0; i<countries.length; i++) {
+            var datalistElement = document.createElement("option");
+            datalistElement.value = countries[i];
+            datalistElement.appendChild(document.createTextNode(countries[i]));
+            document.getElementById('state').appendChild(datalistElement);
+        }
+
+        // var form = document.getElementById("myForm");
+        function handleBlur(e) {
+            var errMsgId = e.target.id+'ErrMsg';
+            if(e.target.value === ''){
+                document.getElementById(errMsgId).classList.remove('hide');
+            }  else {
+                document.getElementById(errMsgId).classList.add('hide');
+                if(e.target.id === "emailId") {
+                    var regex = /^[a-zA-Z0-9!#$%^&*]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+                    if(!regex.test(e.target.value)) {
+                        document.getElementById(errMsgId).classList.remove('hide');
+                    }
+                }
+                if(e.target.id === "pwd") {
+                    var pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+                    if(!pwdRegex.test(e.target.value)) {
+                        document.getElementById(errMsgId).classList.remove('hide');
+                    }
+                }
+            }
+
+        }
+        function formValidate(e) {
+            e.preventDefault();
+            if(document.forms['userForm']['fName'].value === '') {
+                // document.getElementById('fNameErrMsg').innerHTML = ;
+            }
+            if(document.forms['userForm']['lName'].value === '') {
+                //document.getElementById('lNameErrMsg').innerHTML = ;
+            }
+            if(document.forms['userForm']['email'].value === '') {
+                //document.getElementById('EmailErrMsg').innerHTML = ;
+            }
+            if(document.forms['userForm']['pwd'].value === '') {
+                //document.getElementById('PwdErrMsg').innerHTML = "";
+            }
+        }
+        // form.addEventListener('submit', formValidate);
+        
+
+    </script>
+</html>
+
+
+
+

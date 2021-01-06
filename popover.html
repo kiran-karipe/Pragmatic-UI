@@ -1,0 +1,54 @@
+<html>
+    <style>
+        .container {
+            text-align: center;
+        }
+        .btnClass {
+            margin: auto;
+        }
+/* 
+        .popOverContainer {
+           
+        } */
+
+        .hide {
+            display: none;
+        }
+        .popOverContent {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+        }
+        .arrow{
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid #2f2f2f;
+            font-size: 0;
+            line-height: 0;
+            margin: auto;
+        }
+    </style>
+    <body> 
+        <div class="container">
+            <button type="button" class="btnClass" id="btnId" onclick="handleBtnClick()">Click Me</button>
+            <div id="popOverContainerId" class="popOverContainer hide">
+                <div class="arrow"></div>
+                <div class="popOverContent" id="popOverContentId" onblur="handlePopOver()">
+                gsdtgt
+            </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function handleBtnClick() {
+            document.getElementById('popOverContainerId').classList.remove('hide');
+        }
+
+        function handlePopOver() {
+            document.getElementById('popOverContainerId').classList.add('hide');
+        }
+    </script>
+</html>

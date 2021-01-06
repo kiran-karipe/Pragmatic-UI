@@ -1,0 +1,94 @@
+<html>
+    <style>
+        .AccordionContainer {
+            width : 50%;
+            margin: auto;
+            margin-top: 5%;
+        }
+        .label {
+            height: 30px;
+            background-color:#eee;
+            padding-top:2%;
+            transition: 0.4s;
+        }
+        .label:hover {
+            background-color: #ccc; 
+        }       
+        .icon {
+            float: right;
+            padding-right: 2%;
+        }
+        .padding-left {
+            padding-left: 2%;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+    <body>
+        <div class="AccordionContainer" onclick="handleClick(event)">
+            <div class="label" id="section1">
+                <span class="padding-left">Section1</span>
+                <span class="icon" id="iconId1">+</span>
+            </div>
+            <div class="content padding-left hide" id="content1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+            <div class="label" id="section2">
+                <span class="padding-left">Section2</span>
+                <span class="icon" id="iconId2">+</span>
+            </div>
+            <div class="content padding-left hide" id="content2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+            <div class="label" id="section3">
+                <span class="padding-left">Section3</span>
+                <span class="icon" id="iconId3">+</span>
+            </div>
+            <div class="content padding-left hide" id="content3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </div>
+    </body>
+    <script>
+        function handleClick(e) {
+            if(e.target.id === "section1") {
+                if(document.getElementById("content1").classList.contains("hide")){
+                    document.getElementById("content1").classList.remove('hide');
+                    document.getElementById("content2").classList.add('hide');
+                    document.getElementById('iconId2').innerHTML = "+";
+                    document.getElementById("content3").classList.add('hide');
+                    document.getElementById('iconId3').innerHTML = "+";
+                    document.getElementById('iconId1').innerHTML = "-";
+                } else {
+                    document.getElementById("content1").classList.add('hide');
+                    document.getElementById('iconId1').innerHTML = "+";
+                }
+            } else if (e.target.id === "section2") {
+                if(document.getElementById("content2").classList.contains("hide")){
+                    document.getElementById("content2").classList.remove('hide');
+                    document.getElementById("content1").classList.add('hide');
+                    document.getElementById('iconId1').innerHTML = "+";
+                    document.getElementById("content3").classList.add('hide');
+                    document.getElementById('iconId3').innerHTML = "+";
+                    document.getElementById('iconId2').innerHTML = "-";
+                } else {
+                    document.getElementById("content2").classList.add('hide');
+                    document.getElementById('iconId2').innerHTML = "+";
+                }
+            }  else if (e.target.id === "section3") {
+                if(document.getElementById("content3").classList.contains("hide")){
+                    document.getElementById("content3").classList.remove('hide');
+                    document.getElementById("content1").classList.add('hide');
+                    document.getElementById('iconId1').innerHTML = "+";
+                    document.getElementById("content2").classList.add('hide');
+                    document.getElementById('iconId2').innerHTML = "+";
+                    document.getElementById('iconId3').innerHTML = "-";
+                } else {
+                    document.getElementById("content3").classList.add('hide');
+                    document.getElementById('iconId3').innerHTML = "+";
+                }
+            }
+        }
+    </script>
+</html>

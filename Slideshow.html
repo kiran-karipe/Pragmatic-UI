@@ -1,0 +1,132 @@
+<html>
+<style>
+    .container {
+        text-align: center;
+    }
+    .image {
+        width: 55%;
+        height: 55%;
+        background-color: black;
+        margin: auto;
+    }
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+    .active, .dot:hover {
+        background-color: #717171;
+    }
+    .linkContainer {
+        margin-top: 2%;
+    }
+    .next{
+        display: inline-block;
+        position: absolute;
+        padding-top: 5px;
+        right: 25%;
+        color: white;
+        top: 25%;
+        width: 25px;
+        height: 25px;
+        transition: background-color 0.6s ease;
+    }
+    .prev{
+        display: inline-block;
+        position: absolute;
+        padding-top: 5px;
+        left: 25%;
+        color: white;
+        top: 25%;
+        width: 25px;
+        height: 25px;
+        transition: background-color 0.6s ease;
+    }
+    .next:hover, .prev:hover{
+        background-color: #bbb;
+    }
+</style>
+<body>
+    <div class="container">
+        <img id="imageId" class="image" src="./images/image-1.jpg" alt="Img"/>
+        <a class="prev" id="prevId" onclick="handlePrevClick(event)">&#10094;</a>
+        <a class="next" id="nextId" onclick="handlePrevClick(event)">&#10095;</a>
+        <div id="linkContainerId" class="linkContainer" onclick="handleClick(event)">
+            <span id="span1" class="dot active"></span>
+            <span id="span2" class="dot"></span>
+            <span id="span3" class="dot"></span>
+            <span id="span4" class="dot"></span>
+        </div>
+    </div>
+</body>
+<script>
+    let counter =1;
+
+    function handleClick(e){
+        var spanElements = document.getElementById('linkContainerId').children;
+        for(var i=0; i<spanElements.length; i++){
+            spanElements[i].classList.remove('active');
+        }
+        let spanId = e.target.id;
+        if(spanId === "span1") {
+            counter =1;
+        } else if(spanId === "span2") {
+            counter =2;
+        } else if(spanId === "span3") {
+            counter =3;
+        } else if(spanId === "span4") {
+            counter =4;
+        }
+        let targetElement = document.getElementById(spanId);
+        changeImage(counter,targetElement);
+    }
+
+    function handlePrevClick(e){
+        var spanElements = document.getElementById('linkContainerId').children;
+        for(var i=0; i<spanElements.length; i++){
+            spanElements[i].classList.remove('active');
+        }
+        if(e.target.id ==="prevId" && counter>1){
+            counter--;
+        }
+        if(e.target.id ==="nextId" && counter<4){
+            counter++;
+        }
+        if(counter === 1) {
+            spanId = "span1";
+        } else if(counter === 2) {
+            spanId = "span2";
+        } else if(counter === 3) {
+            spanId = "span3";
+        } else if(counter === 4) {
+            spanId = "span4";
+        } 
+        let targetElement = document.getElementById(spanId);
+        changeImage(counter,targetElement);    
+    }
+
+    function changeImage(number,targetElement) {
+        var image = document.getElementById('imageId');
+        targetElement.classList.add('active');
+        switch(number){
+            case 2 : 
+                image.src = './images/image-2.jpg';
+                break;
+            case 3 : 
+                image.src = './images/image-3.jpg';
+                break;
+            case 4 : 
+                image.src = './images/image-4.jpg';
+                break;
+            default : 
+                image.src = './images/image-1.jpg';
+                break;
+        }
+    }
+</script>
+</html>

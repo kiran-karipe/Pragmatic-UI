@@ -1,0 +1,88 @@
+<html>
+    <style>
+        .margin-right {
+            margin-right: 4px;
+        }
+    </style>
+    <body>
+        <div id="addTabContainer"><button value="addTab">Add</button></div>
+        <div id="tabContainer">
+            <button value="Tab1">Tab1</button>
+            <button value="Tab2">Tab2</button>
+            <button value="Tab3">Tab3</button>
+        </div>
+        <div id="content">
+
+        </div>
+    </body>
+    <script>
+    var contentDiv = document.getElementById('content');
+    var tabContent = new Map();
+    httpGet("https://jsonplaceholder.typicode.com/posts/1",handleHttpResponse,0);
+    function httpGet(url,callback,value) {
+
+        // Using XMLHttp
+
+        // var xmlHttp = new XMLHttpRequest();
+        // xmlHttp.onreadystatechange = function() {
+        //     if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        //         callback(JSON.parse(xmlHttp.responseText),value);
+        //     }
+        // }
+        // xmlHttp.open("GET",url,true);
+        // xmlHttp.send(null);
+
+        //Using Fetch
+
+        fetch(url).then(response => response.json()).then(json => callback(json,value));
+    }
+
+    function handleHttpResponse(response,index) {
+        tabContent.set(index,response.body);
+        contentDiv.innerHTML = response.body;
+    }
+
+    document.getElementById('tabContainer').addEventListener('click',function(){
+        var btnElements = [...document.getElementById('tabContainer').children];
+        const tabIndex = btnElements.indexOf(event.target);
+        if(tabContent.has(tabIndex)) {
+            contentDiv.innerHTML = tabContent.get(tabIndex);
+        } else {
+            httpGet("https://jsonplaceholder.typicode.com/posts/"+(tabIndex+1),handleHttpResponse,tabIndex);
+        }
+    })
+    
+    document.getElementById('addTabContainer').addEventListener('click',function() {
+        var count = document.getElementById('tabContainer').children.length;
+        var newTab = document.createElement("button");
+        newTab.appendChild(document.createTextNode("Tab" + (count+1)));
+        newTab.setAttribute('value', "Tab"+ (count+1));
+        newTab.classList.add('margin-right');
+        document.getElementById('tabContainer').appendChild(newTab);  
+        httpPost('https://jsonplaceholder.typicode.com/posts',handleHttpResponse,count);
+    })
+
+    function httpPost(url,callback,index) {
+        fetch(url,getPostRequest()).then((response) => response.json())
+        .then((json) => {
+            if(json) {
+                callback(json,index);
+            }
+        })
+    }
+
+    function getPostRequest() {
+        return  {
+            method: 'POST',
+            body: JSON.stringify({
+                title: 'foo',
+                body: 'abc',
+                userId : 1
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        }
+    }
+    </script>
+</html>

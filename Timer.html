@@ -1,0 +1,44 @@
+<!-- Create an input, a Create button and a timer component | the input takes in time and when the button is clicked, 
+the countdown in timer component starts | countdown is in ms - no need of formatting the time -->
+<!-- Have a pause button in the timer component, that can pause and resume the timer back -->
+
+<html>
+    <body>
+        <input type="text" id="inputId">
+        <button type="button" id="createBtn">Create Timer</button>
+        <button type="button" id="pauseBtn">Pause Timer</button>
+        <div id="timer"></div>
+    </body>
+</html>
+<script>
+    let timerInterval;
+    document.getElementById('createBtn').addEventListener('click',function() {
+        timerValue = document.getElementById('inputId').value;
+        timerInterval = setInterval(callbackFunc,1)
+    });
+
+    document.getElementById('pauseBtn').addEventListener('click',function() {
+        if(document.getElementById('pauseBtn').textContent === 'Pause Timer') {
+            document.getElementById('pauseBtn').textContent = 'Resume Timer';
+            clearTimerInterval();
+        } else {
+            document.getElementById('pauseBtn').textContent = 'Pause Timer';
+            timerInterval = setInterval(callbackFunc,1);
+        }
+        
+    });
+
+    function callbackFunc() {
+        if (timerValue > 0) {
+            timerValue--;
+            document.getElementById('timer').innerHTML = timerValue;
+        } else {
+            clearTimerInterval();
+        }
+    }
+
+    function clearTimerInterval() {
+        clearInterval(timerInterval);
+    }
+   
+</script>
