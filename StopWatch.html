@@ -7,8 +7,8 @@
     </body>
 </html>
 <script>
-let intervalId, seconds=0, cseconds=0, minutes=0;
-document.getElementById('watchDiv').innerHTML = seconds + ' : ' + cseconds;
+let intervalId, seconds = 0, cseconds = 0, minutes = 0;
+document.getElementById('watchDiv').innerHTML = seconds + 's : ' + cseconds;
 function onStart(event) {
     if(event.target.textContent === "Start") {
         event.target.textContent = "Stop";
@@ -21,9 +21,7 @@ function onStart(event) {
 
 function onReset() {
     clearInterval(intervalId);
-    cseconds = 0;
-    seconds = 0;
-    minutes = 0;
+    cseconds = 0, seconds = 0, minutes = 0;
     document.getElementById('watchDiv').innerHTML = seconds + 's : ' + cseconds;
 }
 
@@ -36,7 +34,7 @@ function startWatch() {
             seconds++;
         }
     } else {
-        seconds =0;
+        seconds = 0;
         minutes++;
     }
     let value = (minutes > 0) ? minutes + 'm : ' + seconds + 's : ' + cseconds : seconds + 's : ' + cseconds;
