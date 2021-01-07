@@ -1,0 +1,50 @@
+<html>
+    <body>
+        <span id='watchDiv'>
+        </span>
+        <button type="button" id="startBtn" onclick="onStart(event)">Start</button>
+        <button type="button" id="resetBtn" onclick="onReset()">Reset</button>
+    </body>
+</html>
+<script>
+let intervalId, seconds=0, cseconds=0, minutes=0;
+document.getElementById('watchDiv').innerHTML = seconds + ' : ' + cseconds;
+function onStart(event) {
+    if(event.target.textContent === "Start") {
+        event.target.textContent = "Stop";
+        intervalId = setInterval(startWatch,10);
+    } else {
+        event.target.textContent = "Start";
+        stopWatch();
+    }
+}
+
+function onReset() {
+    clearInterval(intervalId);
+    cseconds = 0;
+    seconds = 0;
+    minutes = 0;
+    document.getElementById('watchDiv').innerHTML = seconds + 's : ' + cseconds;
+}
+
+function startWatch() {
+    if(seconds < 60) {
+        if(cseconds < 100) {
+            cseconds++;
+        } else {
+            cseconds = 0;
+            seconds++;
+        }
+    } else {
+        seconds =0;
+        minutes++;
+    }
+    let value = (minutes > 0) ? minutes + 'm : ' + seconds + 's : ' + cseconds : seconds + 's : ' + cseconds;
+    document.getElementById('watchDiv').innerHTML = value;
+}
+
+function stopWatch() {
+    clearInterval(intervalId);
+}
+
+</script>
