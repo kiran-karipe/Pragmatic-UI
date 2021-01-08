@@ -1,0 +1,90 @@
+<html>
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="tableContainer">
+            <table id="userTable" class="table table-striped" >
+                <tr id="tableRow" onclick="sortUserData(event)">
+                    <th class="pointer" id="id">#</th>
+                    <th class="pointer" id="username">UserName</th>
+                    <th class="pointer" id="email">Email</th>
+                    <th class="pointer" id="phone">Phone</th>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+<script>
+let direction = "des";
+const userDetails = ["id", "username", "email", "phone"];
+fetch('https://jsonplaceholder.typicode.com/users').then((response) => response.json())
+.then((json) => {
+    handleUserData(json);
+});
+
+function handleUserData(response) {
+    
+    response.forEach(user => {
+        const userDatatr = document.createElement("tr");
+        Object.keys(user).forEach( key => {
+            if(userDetails.indexOf(key) >-1) {
+                const userDatatd = document.createElement("td");
+                userDatatd.appendChild(document.createTextNode(user[key]));
+                userDatatr.appendChild(userDatatd);
+            }
+        })
+        document.getElementById('userTable').appendChild(userDatatr);
+    });  
+}
+
+function formatNumber(number) {
+    
+}
+
+function sortUserData(event) {
+    if(direction === "asc") {
+        direction = "des";
+    } else {
+        direction = "asc";
+    }
+    const cellIndex = userDetails.indexOf(event.target.id);
+    let tableRows = [...document.getElementById('userTable').rows];
+    //let headerRow = tableRows.splice(0,1);
+    let isSwapped = true;
+    while(isSwapped) {
+        isSwapped = false;
+        for(let i=1; i<tableRows.length-1; i++) {
+            let currentCell = [...tableRows[i].cells][cellIndex].innerHTML.toLowerCase();
+            let nextCell = [...tableRows[i+1].cells][cellIndex].innerHTML.toLowerCase();
+            if(cellIndex === 0) {
+                currentCell = +currentCell;
+                nextCell = +nextCell;
+            }
+            if( currentCell > nextCell && direction === "asc") {
+                sortCellData(i);
+            }
+            if(currentCell < nextCell && direction === "des") {
+                sortCellData(i);
+            }
+        }
+    }
+    
+    function sortCellData(i) {
+        isSwapped = true;
+        tableRows[i].parentNode.insertBefore(tableRows[i+1],tableRows[i]);
+        const temp = tableRows[i];
+        tableRows[i] = tableRows[i+1];
+        tableRows[i+1] = temp;    
+    }
+}
+
+</script>
+
+
+
