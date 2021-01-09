@@ -3,11 +3,15 @@
         .pointer {
             cursor: pointer;
         }
+        #tableContainer {
+            margin-top: 1%;
+        }
     </style>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
-    <body>
+    <body>       
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" onkeyup="handleSearch(event)">
         <div id="tableContainer">
             <table id="userTable" class="table table-striped" >
                 <tr id="tableRow" onclick="sortUserData(event)">
@@ -23,9 +27,11 @@
 <script>
 let direction = "des";
 const userDetails = ["id", "username", "email", "phone"];
+let userTableRows;
 fetch('https://jsonplaceholder.typicode.com/users').then((response) => response.json())
 .then((json) => {
     handleUserData(json);
+    userTableRows = [...document.getElementById('userTable').rows];
 });
 
 function handleUserData(response) {
@@ -43,8 +49,25 @@ function handleUserData(response) {
     });  
 }
 
-function formatNumber(number) {
-    
+function handleSearch(event) {
+    let keyWord = event.target.value.toLowerCase();
+    let tableRows = [...userTableRows];
+    let headerRow = tableRows[0];
+    let rowsArr =[];
+    for(let i=1; i<tableRows.length; i++) {
+        const userData = [...tableRows[i].cells];
+        for(let j=0; j<userData.length; j++) {
+            if(userData[j].innerHTML.toLowerCase().indexOf(keyWord) > -1) {
+                if(rowsArr.length === 0) {
+                    document.getElementById('userTable').innerHTML = '';
+                    document.getElementById('userTable').appendChild(headerRow);
+                }
+                document.getElementById('userTable').appendChild(tableRows[i]);
+                rowsArr.push(tableRows[i]);
+            }
+        }
+        
+    }
 }
 
 function sortUserData(event) {
@@ -55,7 +78,6 @@ function sortUserData(event) {
     }
     const cellIndex = userDetails.indexOf(event.target.id);
     let tableRows = [...document.getElementById('userTable').rows];
-    //let headerRow = tableRows.splice(0,1);
     let isSwapped = true;
     while(isSwapped) {
         isSwapped = false;
