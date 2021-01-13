@@ -1,0 +1,63 @@
+<!-- Implement Nested Checkboxes (parent is checked, children are checked and vice versa. Must use actual checkbox input) -->
+<html>
+    <style>
+        .margin-left {
+            margin-left: 1%;
+        }
+    </style>
+    <body>
+        <div id="checkboxContainer" onclick="handleCheckbox(event)">
+            <input type="checkbox" name="vehicle" id="checkbox">
+            <label for="vehicle">Vehicle</label>
+            <div class="margin-left">
+                <div>
+                    <input type="checkbox" name="vehicle1" class="children">
+                    <label for="vehicle1">Car</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="vehicle2" class="children">
+                    <label for="vehicle2">Bike</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="vehicle3" class="children">
+                    <label for="vehicle3">Bus</label>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function handleCheckbox(event) {
+            if(event.target.type === "checkbox") {
+                if(!event.target.classList.contains('children')) {
+                    if(!event.target.checked) {
+                        handleChildCheckboxes(false);
+                    } else {
+                        handleChildCheckboxes(true);
+                    }
+                } else {
+                        if(!event.target.checked) {
+                            document.getElementById('checkbox').checked = false;
+                        } else {
+                            let childElements = [...document.getElementsByClassName('children')];
+                            let isChecked = true;
+                            for(let i=0; i<childElements.length; i++) {
+                                if(!childElements[i].checked) {
+                                    isChecked = false;
+                                    break;
+                                }
+                            }
+                            document.getElementById('checkbox').checked = isChecked;
+                        } 
+                } 
+            } 
+        }
+        function handleChildCheckboxes(checked) {
+            let childElements = [...document.getElementsByClassName('children')];
+            for(let i=0; i<childElements.length; i++) {
+                childElements[i].checked = checked;
+            }
+        }
+
+        
+    </script>
+</html>
