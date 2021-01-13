@@ -1,0 +1,36 @@
+<!-- In the HTML body define a div that displays some text. 
+Write a JS function that alternatively shows/hides the div whenever an event is triggered. 
+You can use an event of your choice. Also, display the no. of times the div is hidden and displayed -->
+
+<html>
+<style>
+.hide {
+    display: none;
+}
+</style>
+<body>
+    <div id="showText"> Hello!!! </div>
+    <button type="button" onclick="toggleText()">clickMe</button>
+    <div id="displayCount">DisplayCount : 0 </div>
+    <div id="hiddenCount">HiddenCount : 0</div>
+</body>
+</html>
+<script>
+let displayCount =0, hiddenCount=0;
+const displayCountEle = document.getElementById('displayCount');
+const hiddenCountEle = document.getElementById('hiddenCount');
+function toggleText() {
+    
+    const divElement = document.getElementById('showText');
+    if(divElement.classList.contains('hide')) {
+        divElement.classList.remove('hide');
+        displayCount++;
+        displayCountEle.innerHTML = "DisplayCount : "+displayCount;
+    } else {
+        divElement.classList.add('hide');
+        hiddenCount++;
+        hiddenCountEle.innerHTML = "HiddenCount : "+hiddenCount;
+    }
+}
+
+</script>

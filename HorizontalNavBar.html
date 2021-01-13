@@ -1,0 +1,108 @@
+<html>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        .navContainer {   
+            display: flex;
+            width: 70%;
+            margin: auto;
+            text-align: left;
+        }
+        .navContainer > div{
+            width : 50%;
+        }
+        .navContainer > li > ul >li{
+            /* margin-right : 40px; */
+            text-align: left;
+        }
+        .hide {
+            color : red;
+        }
+        }
+    </style>
+    <body>
+        <div id="menuContainer" onmouseover="showSubMenu(event)" onmouseout="hideSubMenu(event)"></div>
+    </body>
+</html>
+<script>
+    const userData = 
+        {
+            address: 
+            {
+                street: "Kulas Light",
+                suite: "Apt. 556",
+                city: "Gwenborough",
+                zipcode: "92998-3874",
+                geo: {
+                    lattitude: "-37.3159",
+                    lonngtide: "81.1496"
+                }
+            },
+            company: {
+                name: "Romaguera-Crona",
+                catchPhrase: "Multi-layered client-server neural-net",
+                bs: "harness real-time e-markets",
+                geo: {
+                    lattitude: {
+                        some:  "-37.3159",
+                        some2: 'dshkjf'
+                    },
+                    lonngtide: "81.1496"
+                }
+            }
+        }
+    const targetIds = [];
+    function createMenuItems(userData) {
+        const menuContainer = createSubMenuItems(userData);
+        menuContainer.classList.add('navContainer');
+        menuContainer.classList.remove('hide');
+        document.getElementById('menuContainer').appendChild(menuContainer);
+    }
+
+    function createSubMenuItems(item) {
+            const subMenuContainer = document.createElement("div");
+            subMenuContainer.classList.add('hide');
+            Object.keys(item).forEach(key => {
+                const subMenuItem = document.createElement("div");
+                subMenuItem.appendChild(document.createTextNode(key));
+                if(typeof(item[key]) === "object"){
+                    const subMenuDiv = document.createElement("div");
+                    subMenuDiv.setAttribute('id',key);
+                    targetIds.push(key);
+                    subMenuItem.classList.add('subMenuDiv');
+                    subMenuItem.appendChild(createSubMenuItems(item[key]));
+                    subMenuDiv.appendChild(subMenuItem);
+                    subMenuContainer.appendChild(subMenuDiv);
+                }  else {
+                    subMenuContainer.appendChild(subMenuItem);
+                } 
+            })
+            return subMenuContainer;
+    }
+    
+    createMenuItems(userData);
+
+    function showSubMenu(event) {
+        if(targetIds.indexOf(event.target.id) > -1) {
+            if([...event.target.children].length > 0) {
+                let subMenuItem = [...event.target.children][0];
+                subMenuItem.classList.remove('hide');
+                console.log(subMenuItem);
+            }
+        }
+    } 
+
+    function hideSubMenu(event) {
+        if(targetIds.indexOf(event.target.id) > -1) {
+            if([...event.target.children].length > 0) {
+                let subMenuItem = [...event.target.children][0];
+                subMenuItem.classList.add('hide');
+            }
+        }
+    }
+
+    
+
+</script>
