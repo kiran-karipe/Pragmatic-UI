@@ -2,17 +2,22 @@
     display: flex;
     border: 2px solid black;
     width: 85%;
-    height: 80%;
+    /* height: 80%; */
     margin: 5% auto;
 }
+
+/* .imgixContainer > div {
+    width: 50%;
+} */
 .sideMenuContainer {
     width: 45%;
+
     margin: 5% 0 5% 3%;
     border: 2px solid black;
 }
 
 .imageContainer {
-    width: 75%;
+    width: 65%;
     /* height: 60%; */
     margin: 5%;
     position: relative;
@@ -30,10 +35,12 @@
     background-size: cover;
     width: 100%;
     height: 100%;
+    background-position: center;
 }
 .txt {
     position: absolute;
     bottom: 0;
+    /* width: 100%; */
 }
 .inputContainer {
     width: 50%;
@@ -52,9 +59,20 @@
     position: relative;
     right: 3%;
 } 
+#submitBtnId {
+    margin: auto;
+    width: 20%;
+    height: 8%;
+    border-radius: 10px;
+}
+
+.btnContainer {
+    text-align: center;
+}
 .menuList {
     list-style-type: none;
     margin-top: 8%;
+    padding-left: 4%;
 }
 .menuListItem {
     padding-bottom: 10%;
@@ -62,9 +80,38 @@
 }
 .inputElement {
     width: 75%;
-    height: 10%;
+    height: 7%;
     float: right;
 }
+
+@media only screen and (max-width: 1250px) and (min-width: 900px) {
+    .inputElement {
+        width: 65%;
+        height: 7%;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    input,label {
+        display: block;
+    }
+    .inputElement {
+        width: 80%;
+        height: 7%;
+        float: none;
+    }
+    .menuListItem {
+        padding-bottom: 3%;
+        width: 95%;
+    }
+    .menuList {
+        list-style-type: none;
+        margin-top: 5%;
+        padding-left: 4%;
+    }
+}
+
 .hide {
     display: none;
 }
@@ -83,10 +130,10 @@
     width: 75%;
     float: right;
 }
-#textAlignId > input {
+/* #textAlignId > input {
     width: 100%;
     height: 10%;
-}
+} */
 .top-left {
     top: 0;
     left: 0;
@@ -94,12 +141,14 @@
 .top-right {
     top: 0;
     right: 0;
+    /* text-align: right; */
 }
 
 .top-center {
     top: 0;
-    left: 22%;
-    right: 22%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0%);
 }
 
 .bottom-left {
@@ -114,8 +163,9 @@
 
 .bottom-center {
     bottom: 0;
-    left: 22%;
-    right: 22%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0%);
 }
 
 .middle-left {
@@ -129,7 +179,8 @@
 }
 
 .middle-center {
-    top: 48%;
-    left: 22%;
-    right: 22%;
-}
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0%);
+} 

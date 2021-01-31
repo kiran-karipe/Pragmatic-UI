@@ -16,16 +16,18 @@
             const inputElement = document.createElement("input");
             inputElement.setAttribute('id',menuItems[i].toLowerCase()); //change id case
             menuItem.appendChild(label);
-            if(menuItems[i] === 'Text Align') {
-                const textAlignInputContainer = document.createElement("div");
-                textAlignInputContainer.setAttribute('id', 'textAlignId');
-                textAlignInputContainer.appendChild(inputElement);
-                textAlignInputContainer.appendChild(textAlignDropdown());
-                menuItem.appendChild(textAlignInputContainer);
-            } else {
-                inputElement.classList.add('inputElement');
+            // if(menuItems[i] === 'Text Align') {
+            //     const textAlignInputContainer = document.createElement("div");
+            //     textAlignInputContainer.setAttribute('id', 'textAlignId');
+            //     textAlignInputContainer.appendChild(inputElement);
+            //     textAlignInputContainer.appendChild(textAlignDropdown());
+            //     menuItem.appendChild(textAlignInputContainer);
+            // } else {
+            //     inputElement.classList.add('inputElement');
+            //     menuItem.appendChild(inputElement);
+            // }
+            inputElement.classList.add('inputElement');
                 menuItem.appendChild(inputElement);
-            }
             menuList.appendChild(menuItem);
         }
         menuList.appendChild(blendModeDropdown());
@@ -49,25 +51,25 @@
         return decodeURI(txt);
     }
 
-    function textAlignDropdown() {
-        const textAlignValues= ["top", "bottom", "middle", "left", "center", "right"]; // change array name
-        const textAlignList = document.createElement("ul");
-        textAlignList.setAttribute('id','textAlignDropdownId');
-        for(let i=0; i<textAlignValues.length; i++) {
-            const textAlignElement = document.createElement("li");
-            textAlignElement.appendChild(document.createTextNode(textAlignValues[i]));
-            textAlignElement.classList.add('textAlignElement');
-            textAlignList.appendChild(textAlignElement);
-        }
-        textAlignList.classList.add('textAlignDropdown', 'hide');
-        return textAlignList;
-    }
-    const textAlignDropdownElement = document.getElementById('textAlignDropdownId')
+    // function textAlignDropdown() {
+    //     const textAlignValues= ["top", "bottom", "middle", "left", "center", "right"]; // change array name
+    //     const textAlignList = document.createElement("ul");
+    //     textAlignList.setAttribute('id','textAlignDropdownId');
+    //     for(let i=0; i<textAlignValues.length; i++) {
+    //         const textAlignElement = document.createElement("li");
+    //         textAlignElement.appendChild(document.createTextNode(textAlignValues[i]));
+    //         textAlignElement.classList.add('textAlignElement');
+    //         textAlignList.appendChild(textAlignElement);
+    //     }
+    //     textAlignList.classList.add('textAlignDropdown', 'hide');
+    //     return textAlignList;
+    // }
+    // const textAlignDropdownElement = document.getElementById('textAlignDropdownId')
     const textAlignInputElement = document.getElementById('text align');
-    textAlignInputElement.addEventListener('click', function(event) {
-        event.stopPropagation();
-        textAlignDropdownElement.classList.toggle('hide');
-    });
+    // textAlignInputElement.addEventListener('click', function(event) {
+    //     event.stopPropagation();
+    //     textAlignDropdownElement.classList.toggle('hide');
+    // });
     let textArr =[];
     textAlignInputElement.addEventListener('keyup', function(event) {  // add all handlers in similar way
         const temp = event.target.value.split(',');
@@ -102,22 +104,22 @@
     });
 
 
-    window.onclick = function(event) {
-        textAlignDropdownElement.classList.add('hide');
-    }
+    // window.onclick = function(event) {
+    //     textAlignDropdownElement.classList.add('hide');
+    // }
 
-    textAlignDropdownElement.addEventListener('click', function(event) {
-        event.stopPropagation();
-        if(textAlignInputElement.value === '') {
-            textAlignInputElement.value += event.target.textContent;
-        } else {
-            if(textAlignInputElement.value.indexOf(event.target.textContent) === -1) {
-                textAlignInputElement.value += ',' + event.target.textContent;
-            }    
-        }
-        textArr.push(event.target.textContent);
-        handleTextAlignment(textArr);
-    });
+    // textAlignDropdownElement.addEventListener('click', function(event) {
+    //     event.stopPropagation();
+    //     if(textAlignInputElement.value === '') {
+    //         textAlignInputElement.value += event.target.textContent;
+    //     } else {
+    //         if(textAlignInputElement.value.indexOf(event.target.textContent) === -1) {
+    //             textAlignInputElement.value += ',' + event.target.textContent;
+    //         }    
+    //     }
+    //     textArr.push(event.target.textContent);
+    //     handleTextAlignment(textArr);
+    // });
 
     function handleTextAlignment(value) {
         let textClass = '';
@@ -171,7 +173,7 @@
     document.getElementById('blendModesId').onchange = function(event) {
         const backgroundImageElement = document.getElementById('backgroundImageId');
         const style = document.createElement('style');
-        style.type = 'text/css';
+        // style.type = 'text/css';
         style.innerHTML = `.backgroundBlendMode { background-blend-mode: ${event.target.value}; }`;
         document.getElementsByTagName('head')[0].appendChild(style);
         backgroundImageElement.classList.add('backgroundBlendMode');
@@ -190,7 +192,7 @@
     document.getElementById('submitBtnId').onclick = function(event) {
         const queryParamsKeys = ["txt", "txtclr", "txtsize", "txtalign", "blend", "balpha"];
         let queryParam = '';
-        let url = "/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg";
+        let src = "/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg";
         const inputElements = document.querySelectorAll("input");
         for(let i=0; i<inputElements.length; i++) {
             if(inputElements[i].value) {
@@ -198,6 +200,7 @@
             }
         }
         queryParam += "bm=" + document.querySelectorAll("select")[0].value;
-        url += "?"+queryParam;
+        // url += "?"+queryParam;
+        let url = "newImage.html?"+ src + "&" +queryParam;
         document.querySelectorAll("a")[0].href = encodeURI(url);
     }
