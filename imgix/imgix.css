@@ -1,12 +1,13 @@
 body {
-    background-color: #E7E7E7;
+    background-color: #E0E6E6;
+    font-family: optima, sans-serif;
 }
 .imgixContainer {
     display: flex;
     width: 85%;
     /* height: 80%; */
     margin: 5% auto;
-    background-color: #E7E7E7;
+    background-color: #E0E6E6;
 }
 /* .imgixContainer > div {
     width: 50%;
@@ -14,7 +15,8 @@ body {
 .sideMenuContainer {
     width: 45%;
     margin: 5% 0 5% 3%;
-    background-color: #F6F6F6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #FFF;
 }
 
 .imageContainer {
@@ -22,6 +24,7 @@ body {
     /* height: 60%; */
     margin: 5%;
     position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 } 
  .image {
     position: relative;
@@ -40,6 +43,8 @@ body {
 .txt {
     position: absolute;
     bottom: 0;
+    /* max-width: 100%;
+    overflow: hidden; */
     /* width: 100%; */
 }
 .inputContainer {
@@ -82,8 +87,21 @@ body {
     width: 75%;
     height: 7%;
     float: right;
-    border: 1px solid #AEC7DA;
+    border: 1px solid #c9cdcf;
+    border-radius: 2px;
+    transition: border .2s ease-in-out,background-color .2s ease-in-out,color .2s ease-in-out;
+    background-color: #F5F5F5;
 }
+
+/* select {
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: 96% / 15% no-repeat #F5F5F5;
+} */
+
 
 @media only screen and (max-width: 1250px) and (min-width: 900px) {
     .inputElement {
@@ -112,6 +130,7 @@ body {
         padding-left: 4%;
     }
 }
+
 
 .hide {
     display: none;
@@ -170,18 +189,20 @@ body {
 }
 
 .middle-left {
-    top: 48%;
+    top: 50%;
     left: 0;
+    transform: translate(0%, -10%);
 }
 
 .middle-right {
-    top: 48%;
+    top: 50%;
     right: 0;
+    transform: translate(0%, -10%);
 }
 
 .middle-center {
     top: 50%;
     left: 50%;
     text-align: center;
-    transform: translate(-50%, 0%);
+    transform: translate(-50%, -10%);
 } 
