@@ -5,13 +5,10 @@ body {
 .imgixContainer {
     display: flex;
     width: 85%;
-    /* height: 80%; */
     margin: 5% auto;
     background-color: #E0E6E6;
 }
-/* .imgixContainer > div {
-    width: 50%;
-} */
+
 .sideMenuContainer {
     width: 45%;
     margin: 5% 0 5% 3%;
@@ -21,7 +18,6 @@ body {
 
 .imageContainer {
     width: 65%;
-    /* height: 60%; */
     margin: 5%;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -43,46 +39,24 @@ body {
 .txt {
     position: absolute;
     bottom: 0;
-    /* max-width: 100%;
-    overflow: hidden; */
-    /* width: 100%; */
 }
 .inputContainer {
     width: 50%;
     margin: auto;
     margin-top: 5%;
 }
-.dropdownArrow {
-    display: inline-block;
-    width: 0; 
-    height: 0; 
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px solid;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    position: relative;
-    right: 3%;
-} 
-#submitBtnId {
-    margin: auto;
-    width: 20%;
-    height: 8%;
-    border-radius: 10px;
-}
 
-.btnContainer {
-    text-align: center;
-}
 .menuList {
     list-style-type: none;
     margin-top: 8%;
     padding-left: 4%;
 }
+
 .menuListItem {
     padding-bottom: 10%;
     width: 95%;
 }
+
 .inputElement {
     width: 75%;
     height: 7%;
@@ -92,16 +66,6 @@ body {
     transition: border .2s ease-in-out,background-color .2s ease-in-out,color .2s ease-in-out;
     background-color: #F5F5F5;
 }
-
-/* select {
-    padding: 5px 35px 5px 5px;
-    font-size: 16px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: 96% / 15% no-repeat #F5F5F5;
-} */
-
 
 @media only screen and (max-width: 1250px) and (min-width: 900px) {
     .inputElement {
@@ -131,29 +95,15 @@ body {
     }
 }
 
-
-.hide {
-    display: none;
-}
-.show {
-    display: block;
-}
-.textAlignDropdown {
-    list-style-type: none;
-    padding: 0;
-    border: 1px solid black;
-}
 .textAlignElement {
     padding: 4% 4% 4% 40%;
 }
+
 #textAlignId {
     width: 75%;
     float: right;
 }
-/* #textAlignId > input {
-    width: 100%;
-    height: 10%;
-} */
+
 .top-left {
     top: 0;
     left: 0;
@@ -161,7 +111,6 @@ body {
 .top-right {
     top: 0;
     right: 0;
-    /* text-align: right; */
 }
 
 .top-center {

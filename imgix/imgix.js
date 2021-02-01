@@ -1,9 +1,14 @@
 const menuItems = ["Text", "Text Color", "Text Size", "Text Align", "Blend", "Blend Alpha"];
 const placeholders = ["Enter your text", "(e.g. fff or red)", "A number (e.g.25)", "top,middle,bottom,left,center,right", "(e.g. fff or red)", "Range [1 - 100]"];
-const textAlign1 = ["top", "bottom", "middle"]; // Change array names
-const textAlign2 = ["left", "center", "right"];
-let prev1 = '', prev2 = '';
-let prevClass = 'bottom-left';
+const verticalTextAlign = ["top", "bottom", "middle"];
+const horizontalTextAlign = ["left", "center", "right"];
+let prevTextAlign1 = '', prevTextAlign12 = '';
+let prevAlignClass = 'bottom-left';
+const textAlignInputElement = document.getElementById('text align');
+let textArr =[];
+
+onLoad();
+
 function onLoad() {
     const menuList = document.createElement("ul");
     menuList.addEventListener('keyup',handleInputChange);
@@ -14,27 +19,16 @@ function onLoad() {
         const label = document.createElement("label");
         label.appendChild(document.createTextNode(menuItems[i]));
         const inputElement = document.createElement("input");
-        inputElement.setAttribute('id', menuItems[i].toLowerCase()); //change id case
+        inputElement.setAttribute('id', menuItems[i].toLowerCase());
         inputElement.setAttribute('placeholder', placeholders[i]);
         menuItem.appendChild(label);
-        // if(menuItems[i] === 'Text Align') {
-        //     const textAlignInputContainer = document.createElement("div");
-        //     textAlignInputContainer.setAttribute('id', 'textAlignId');
-        //     textAlignInputContainer.appendChild(inputElement);
-        //     textAlignInputContainer.appendChild(textAlignDropdown());
-        //     menuItem.appendChild(textAlignInputContainer);
-        // } else {
-        //     inputElement.classList.add('inputElement');
-        //     menuItem.appendChild(inputElement);
-        // }
         inputElement.classList.add('inputElement');
-            menuItem.appendChild(inputElement);
+        menuItem.appendChild(inputElement);
         menuList.appendChild(menuItem);
     }
     menuList.appendChild(blendModeDropdown());
     document.getElementById('sideMenuId').appendChild(menuList);
 }
-onLoad();
 
 function handleInputChange(event) {
     const textHolder = document.getElementById('textHolder');
@@ -50,103 +44,6 @@ function handleInputChange(event) {
 
 function decodeText(txt) {
     return decodeURI(txt);
-}
-
-// function textAlignDropdown() {
-//     const textAlignValues= ["top", "bottom", "middle", "left", "center", "right"]; // change array name
-//     const textAlignList = document.createElement("ul");
-//     textAlignList.setAttribute('id','textAlignDropdownId');
-//     for(let i=0; i<textAlignValues.length; i++) {
-//         const textAlignElement = document.createElement("li");
-//         textAlignElement.appendChild(document.createTextNode(textAlignValues[i]));
-//         textAlignElement.classList.add('textAlignElement');
-//         textAlignList.appendChild(textAlignElement);
-//     }
-//     textAlignList.classList.add('textAlignDropdown', 'hide');
-//     return textAlignList;
-// }
-// const textAlignDropdownElement = document.getElementById('textAlignDropdownId')
-const textAlignInputElement = document.getElementById('text align');
-// textAlignInputElement.addEventListener('click', function(event) {
-//     event.stopPropagation();
-//     textAlignDropdownElement.classList.toggle('hide');
-// });
-let textArr =[];
-textAlignInputElement.addEventListener('keyup', function(event) {  // add all handlers in similar way
-    const temp = event.target.value.split(/[\s,]+/);
-    let inputElementArr = [];
-    for(let i=0; i<temp.length; i++) {
-        if(temp[i] !== "") {
-            inputElementArr.push(temp[i]);
-        }
-    }
-    if (textArr.length > inputElementArr.length) {
-        for(let i=0; i<inputElementArr.length; i++) {
-            if(inputElementArr.indexOf(prev1) === -1) {
-                prev1 = '';
-            }
-            if(inputElementArr.indexOf(prev2) === -1) {
-                prev2 = '';
-            }
-        }
-    } else {
-        prev1 = '';
-        prev2 = '';
-    }
-    textArr.length = 0;
-    for(let i=0; i<inputElementArr.length; i++) {
-        if(textAlign1.indexOf(inputElementArr[i]) > -1 || textAlign2.indexOf(inputElementArr[i]) > -1) {
-            textArr.push(inputElementArr[i]);
-        }
-    }
-    if(textArr.length === inputElementArr.length){
-        handleTextAlignment(textArr);
-    }
-});
-
-
-// window.onclick = function(event) {
-//     textAlignDropdownElement.classList.add('hide');
-// }
-
-// textAlignDropdownElement.addEventListener('click', function(event) {
-//     event.stopPropagation();
-//     if(textAlignInputElement.value === '') {
-//         textAlignInputElement.value += event.target.textContent;
-//     } else {
-//         if(textAlignInputElement.value.indexOf(event.target.textContent) === -1) {
-//             textAlignInputElement.value += ',' + event.target.textContent;
-//         }    
-//     }
-//     textArr.push(event.target.textContent);
-//     handleTextAlignment(textArr);
-// });
-
-function handleTextAlignment(value) {
-    let textClass = '';
-    const textElement = document.getElementById('textHolder');
-    if (textElement.classList.contains(prevClass)) {
-        textElement.classList.remove(prevClass);
-    }
-    for(let i=0; i<value.length; i++) {
-        if(!prev1 && textAlign1.indexOf(value[i]) > -1) {
-            prev1 = value[i];
-        } else if(!prev2 && textAlign2.indexOf(value[i]) > -1) {
-            prev2 = value[i];
-        }
-    }
-    
-    if(!prev1 && prev2) {
-        textClass = 'bottom-'+prev2;
-    } else if (prev1 && !prev2) {
-        textClass = prev1+'-left';
-    } else if(prev1 && prev2) {
-        textClass = prev1+'-'+prev2;
-    }
-    if (textClass) {
-        textElement.classList.add(textClass);
-        prevClass = textClass;
-    } 
 }
 
 function blendModeDropdown() {
@@ -171,6 +68,65 @@ function blendModeDropdown() {
     return menuItem;
 }
 
+textAlignInputElement.addEventListener('keyup', function(event) {
+    const temp = event.target.value.split(/[\s,]+/);
+    let inputElementArr = [];
+    for(let i=0; i<temp.length; i++) {
+        if(temp[i] !== "") {
+            inputElementArr.push(temp[i]);
+        }
+    }
+    if (textArr.length > inputElementArr.length) {
+        for(let i=0; i<inputElementArr.length; i++) {
+            if(inputElementArr.indexOf(prevTextAlign1) === -1) {
+                prevTextAlign1 = '';
+            }
+            if(inputElementArr.indexOf(prevTextAlign2) === -1) {
+                prevTextAlign2 = '';
+            }
+        }
+    } else {
+        prevTextAlign1 = '';
+        prevTextAlign2 = '';
+    }
+    textArr.length = 0;
+    for(let i=0; i<inputElementArr.length; i++) {
+        if(verticalTextAlign.indexOf(inputElementArr[i]) > -1 || horizontalTextAlign.indexOf(inputElementArr[i]) > -1) {
+            textArr.push(inputElementArr[i]);
+        }
+    }
+    if(textArr.length === inputElementArr.length){
+        handleTextAlignment(textArr);
+    }
+});
+
+function handleTextAlignment(value) {
+    let textClass = '';
+    const textElement = document.getElementById('textHolder');
+    if (textElement.classList.contains(prevAlignClass)) {
+        textElement.classList.remove(prevAlignClass);
+    }
+    for(let i=0; i<value.length; i++) {
+        if(!prevTextAlign1 && verticalTextAlign.indexOf(value[i]) > -1) {
+            prevTextAlign1 = value[i];
+        } else if(!prevTextAlign2 && horizontalTextAlign.indexOf(value[i]) > -1) {
+            prevTextAlign2 = value[i];
+        }
+    }
+    
+    if(!prevTextAlign1 && prevTextAlign2) {
+        textClass = 'bottom-'+prevTextAlign2;
+    } else if (prevTextAlign1 && !prevTextAlign2) {
+        textClass = prevTextAlign1+'-left';
+    } else if(prevTextAlign1 && prevTextAlign2) {
+        textClass = prevTextAlign1+'-'+prevTextAlign2;
+    }
+    if (textClass) {
+        textElement.classList.add(textClass);
+        prevAlignClass = textClass;
+    } 
+}
+
 document.getElementById('blendModesId').onchange = function(event) {
     const backgroundImageElement = document.getElementById('backgroundImageId');
     const style = document.createElement('style');
@@ -188,19 +144,3 @@ document.getElementById('blend alpha').onchange = function(event) {
     const backgroundImageElement = document.getElementById('backgroundImageId');
     backgroundImageElement.style.opacity = event.target.value/100;
 }
-
-// document.getElementById('submitBtnId').onclick = function(event) {
-//     const queryParamsKeys = ["txt", "txtclr", "txtsize", "txtalign", "blend", "balpha"];
-//     let queryParam = '';
-//     let src = "/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg";
-//     const inputElements = document.querySelectorAll("input");
-//     for(let i=0; i<inputElements.length; i++) {
-//         if(inputElements[i].value) {
-//             queryParam += queryParamsKeys[i]+ "=" + inputElements[i].value+"&";
-//         }
-//     }
-//     queryParam += "bm=" + document.querySelectorAll("select")[0].value;
-//     // url += "?"+queryParam;
-//     let url = "newImage.html?"+ src + "&" +queryParam;
-//     document.querySelectorAll("a")[0].href = encodeURI(url);
-// }
