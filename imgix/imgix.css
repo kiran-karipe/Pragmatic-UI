@@ -30,7 +30,7 @@ body {
 .backgroundImage {
     position: relative;
     background-color: #4400bb;
-    background-image: url(/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg);
+    background-image: url(https://assets.imgix.net/examples/butterfly.jpg);
     background-size: cover;
     width: 100%;
     height: 100%;
