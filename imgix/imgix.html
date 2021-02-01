@@ -72,18 +72,26 @@ mix-blend-mode =>
 
   1.Url parametes encoding
   2.picking up styles from url parameters
-  3.Responsive
-  4.Placeholders
+  <!-- 3.Responsive -->
+  <!-- 4.Placeholders -->
   5.Dropdown styles
-  6.TextAlign Dropdown style 
-
   8.Background colors
-
+  remove borders
   handle large input text size
+  refactor code 
+
 
   Enter your text 
   (e.g. fff) or (e.g. "red")
   top,middle,bottom,left,center,right
 
 
-const placeholders = ["Enter your text"]
+
+text clr size align blend blend alpha blend mode
+const menuItems = ["Text", "Text Color", "Text Size", "Text Align", "Blend", "Blend Alpha"];
+    const placeholders = ["Enter your text", "(e.g. fff or red)", "A number (e.g.25)", "top,middle,bottom,left,center,right", "(e.g. fff or red)", "Range [1 - 100]"];
+    const menuItems = [{ "Text": "Enter your text" }, ]
+    Text: {
+      placeHolder: "Enter your text"
+    }
+

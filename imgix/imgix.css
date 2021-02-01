@@ -1,19 +1,20 @@
+body {
+    background-color: #E7E7E7;
+}
 .imgixContainer {
     display: flex;
-    border: 2px solid black;
     width: 85%;
     /* height: 80%; */
     margin: 5% auto;
+    background-color: #E7E7E7;
 }
-
 /* .imgixContainer > div {
     width: 50%;
 } */
 .sideMenuContainer {
     width: 45%;
-
     margin: 5% 0 5% 3%;
-    border: 2px solid black;
+    background-color: #F6F6F6;
 }
 
 .imageContainer {
@@ -21,7 +22,6 @@
     /* height: 60%; */
     margin: 5%;
     position: relative;
-    border: 2px solid black;
 } 
  .image {
     position: relative;
@@ -82,6 +82,7 @@
     width: 75%;
     height: 7%;
     float: right;
+    border: 1px solid #AEC7DA;
 }
 
 @media only screen and (max-width: 1250px) and (min-width: 900px) {

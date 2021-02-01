@@ -1,5 +1,6 @@
 
     const menuItems = ["Text", "Text Color", "Text Size", "Text Align", "Blend", "Blend Alpha"];
+    const placeholders = ["Enter your text", "(e.g. fff or red)", "A number (e.g.25)", "top,middle,bottom,left,center,right", "(e.g. fff or red)", "Range [1 - 100]"];
     const textAlign1 = ["top", "bottom", "middle"]; // Change array names
     const textAlign2 = ["left", "center", "right"];
     let prev1 = '', prev2 = '';
@@ -14,7 +15,8 @@
             const label = document.createElement("label");
             label.appendChild(document.createTextNode(menuItems[i]));
             const inputElement = document.createElement("input");
-            inputElement.setAttribute('id',menuItems[i].toLowerCase()); //change id case
+            inputElement.setAttribute('id', menuItems[i].toLowerCase()); //change id case
+            inputElement.setAttribute('placeholder', placeholders[i]);
             menuItem.appendChild(label);
             // if(menuItems[i] === 'Text Align') {
             //     const textAlignInputContainer = document.createElement("div");
@@ -189,18 +191,18 @@
         backgroundImageElement.style.opacity = event.target.value/100;
     }
 
-    document.getElementById('submitBtnId').onclick = function(event) {
-        const queryParamsKeys = ["txt", "txtclr", "txtsize", "txtalign", "blend", "balpha"];
-        let queryParam = '';
-        let src = "/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg";
-        const inputElements = document.querySelectorAll("input");
-        for(let i=0; i<inputElements.length; i++) {
-            if(inputElements[i].value) {
-                queryParam += queryParamsKeys[i]+ "=" + inputElements[i].value+"&";
-            }
-        }
-        queryParam += "bm=" + document.querySelectorAll("select")[0].value;
-        // url += "?"+queryParam;
-        let url = "newImage.html?"+ src + "&" +queryParam;
-        document.querySelectorAll("a")[0].href = encodeURI(url);
-    }
+    // document.getElementById('submitBtnId').onclick = function(event) {
+    //     const queryParamsKeys = ["txt", "txtclr", "txtsize", "txtalign", "blend", "balpha"];
+    //     let queryParam = '';
+    //     let src = "/Users/Sarvani/Documents/workspace/Practice/imgix/butterfly.jpg";
+    //     const inputElements = document.querySelectorAll("input");
+    //     for(let i=0; i<inputElements.length; i++) {
+    //         if(inputElements[i].value) {
+    //             queryParam += queryParamsKeys[i]+ "=" + inputElements[i].value+"&";
+    //         }
+    //     }
+    //     queryParam += "bm=" + document.querySelectorAll("select")[0].value;
+    //     // url += "?"+queryParam;
+    //     let url = "newImage.html?"+ src + "&" +queryParam;
+    //     document.querySelectorAll("a")[0].href = encodeURI(url);
+    // }
